@@ -58,10 +58,6 @@ public class BookController {
     // POST - register new book
     @PostMapping("/register")
     public Book registerBook(@RequestBody Book book) {
-        if (book.getId() == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Book id required");
-        }
-
         book.setId(UUID.randomUUID());
         books.add(book);
         
