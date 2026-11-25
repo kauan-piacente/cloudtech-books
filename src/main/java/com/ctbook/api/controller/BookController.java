@@ -27,7 +27,7 @@ public class BookController {
 
     public BookController(){
         books.add(
-            new Book(UUID.randomUUID(), "Sítio do Pica Pau Amarelo", "Montero Lobato", "Companhia Editora Nacional", "1939", "Fantasy", StatusBook.Available)
+            new Book(UUID.fromString("d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac"), "Sítio do Pica Pau Amarelo", "Montero Lobato", "Companhia Editora Nacional", "1939", "Fantasy", StatusBook.Available)
         );
     }
 
@@ -52,7 +52,7 @@ public class BookController {
             }
         }
 
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
     }
 
     // POST - register new book
