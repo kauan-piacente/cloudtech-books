@@ -23,7 +23,7 @@ class ApiApplicationTests {
 		mockMvc.perform(get("/books"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.length()").value(1))
-		.andExpect(jsonPath("$[0].title").value("Dom Quixote"));
+		.andExpect(jsonPath("$[0].title").value("Sítio do Pica Pau Amarelo"));
 	}
 
 	// Listar Livro por ID
@@ -32,11 +32,11 @@ class ApiApplicationTests {
 		mockMvc.perform(get("/books/d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.id").value("d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac"))
-		.andExpect(jsonPath("$.title").value("Dom Quixote"))
-		.andExpect(jsonPath("$.author").value("Miguel de Cervantes"))
-		.andExpect(jsonPath("$.publisher").value("Francisco de Robles"))
-		.andExpect(jsonPath("$.year").value("1605"))
-		.andExpect(jsonPath("$.category").value("Romance de cavalaria / Sátira"))
+		.andExpect(jsonPath("$.title").value("Sítio do Pica Pau Amarelo"))
+		.andExpect(jsonPath("$.author").value("Montero Lobato"))
+		.andExpect(jsonPath("$.publisher").value("Companhia Editora Nacional"))
+		.andExpect(jsonPath("$.year").value("1939"))
+		.andExpect(jsonPath("$.category").value("Fantasy"))
 		.andExpect(jsonPath("$.status").value("Available"));
 	}
 
@@ -71,27 +71,26 @@ class ApiApplicationTests {
 	void testeAtualizarLivro() throws Exception{
 		String livroAtualizado = """
 			{
-				"title": "Dom Quixote - ATUALIZADO",
-    			"author": "Miguel de Cervantes - ATUALIZADO",
-    			"publisher": "Francisco de Robles",
-    			"year": "1605",
-    			"category": "Romance de cavalaria / Sátira",
-    			"status": "Available"
-  }
+				"title": "Sítio do Pica Pau Amarelo - ATUALIZADO",
+				"author": "Montero Lobato - ATUALIZADO",
+				"publisher": "Companhia Editora Nacional",
+				"year": "1939",
+				"category": "Fantasy",
+				"status": "Available"
 			}
 			""";
 
-			mockMvc.perform(put("/books/update/d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac")
-			.contentType("application/json")
-			.content(livroAtualizado))
-			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.id").value("d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac"))
-			.andExpect(jsonPath("$.title").value("Dom Quixote - ATUALIZADO"))
-			.andExpect(jsonPath("$.author").value("Miguel de Cervantes - ATUALIZADO"))
-			.andExpect(jsonPath("$.publisher").value("Francisco de Robles"))
-			.andExpect(jsonPath("$.year").value("1605"))
-			.andExpect(jsonPath("$.category").value("Romance de cavalaria / Sátira"))
-			.andExpect(jsonPath("$.status").value("Available"));
+		mockMvc.perform(put("/books/update/d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac")
+		.contentType("application/json")
+		.content(livroAtualizado))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id").value("d5c4f1f4-9b46-4bd6-8073-ef7eba30b2ac"))
+		.andExpect(jsonPath("$.title").value("Sítio do Pica Pau Amarelo - ATUALIZADO"))
+		.andExpect(jsonPath("$.author").value("Montero Lobato - ATUALIZADO"))
+		.andExpect(jsonPath("$.publisher").value("Companhia Editora Nacional"))
+		.andExpect(jsonPath("$.year").value("1939"))
+		.andExpect(jsonPath("$.category").value("Fantasy"))
+		.andExpect(jsonPath("$.status").value("Available"));
 	}
 
 	// Verificar inexistência
