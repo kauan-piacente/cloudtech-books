@@ -1,0 +1,32 @@
+name: Testes Automatizados Java
+on:
+  # Permite executar manualmente pela aba Actions
+  workflow_dispatch:
+  # Executa quando for criado ou atualizado um Pull Request para a main
+  pull_request:
+    branches:
+      - main
+  # Executa quando houver push na main (incluindo merge)
+  push:
+    branches:
+      - main
+jobs:
+  testes:
+    # Máquina virtual fornecida pelo GitHub
+    runs-on: ubuntu-latest
+    steps:
+      # Baixa o código do repositório
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+      # Instala/configura o Java 21
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+      # Executa os testes automatizados usando o Maven Wrapper
+      - name: Executar testes
+        run: |
+          chmod +x mvnw
+          ./mvnw test
